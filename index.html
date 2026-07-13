@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recorrido 3D - Museo</title>
+    <!-- Importar A-Frame -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+</head>
+<body>
+    <!-- Añadimos un fondo azul claro para contrastar si tu modelo es oscuro -->
+    <a-scene background="color: #87CEEB">
+        
+        <!-- ==========================================
+             CARGA DEL MODELO 3D
+             ========================================== -->
+        <a-assets timeout="10000">
+            <!-- Aquí cargamos tu archivo .obj -->
+            <a-asset-item id="modelo-obj" src="untitled.obj"></a-asset-item>
+            
+            <!-- NOTA: Si tu programa de 3D te generó también un archivo .mtl (para los colores), 
+                 puedes cargarlo descomentando la línea de abajo y subiéndolo a GitHub -->
+            <!-- <a-asset-item id="modelo-mtl" src="untitled.mtl"></a-asset-item> -->
+        </a-assets>
+
+        <!-- ==========================================
+             ILUMINACIÓN DEL ESPACIO
+             ========================================== -->
+        <!-- Es crucial tener luces o el modelo .obj se verá completamente negro -->
+        <a-light type="ambient" color="#ffffff" intensity="0.6"></a-light>
+        <a-light type="directional" position="2 4 3" color="#ffffff" intensity="0.8"></a-light>
+        <a-light type="directional" position="-2 3 -3" color="#ffffff" intensity="0.4"></a-light>
+
+        <!-- ==========================================
+             TU AMBIENTE 3D
+             ========================================== -->
+        <!-- Aquí se inserta el modelo en la escena. -->
+        <a-entity obj-model="obj: #modelo-obj" position="0 0 0" scale="1 1 1"></a-entity>
+
+        <!-- ==========================================
+             CÁMARA DE JUGADOR (PARA MOVERSE)
+             ========================================== -->
+        <!-- La cámara se posiciona a 1.6 metros de altura (altura promedio de los ojos).
+             wasd-controls permite caminar y look-controls permite mirar. -->
+        <a-camera position="0 1.6 0" wasd-controls="acceleration: 20" look-controls>
+            <a-cursor color="#d4af37"></a-cursor>
+        </a-camera>
+
+    </a-scene>
+</body>
+</html>
