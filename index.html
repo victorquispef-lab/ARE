@@ -2,39 +2,40 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Recorrido 3D - Museo</title>
+    <title>Recorrido 3D - Museo en GLB</title>
+    <!-- Importar A-Frame -->
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 </head>
 <body>
+    <!-- Fondo azul claro para contrastar -->
     <a-scene background="color: #87CEEB">
         
         <!-- ==========================================
-             CARGA DE RECURSOS (OBJ y MTL)
+             CARGA DE RECURSOS (Un solo archivo GLB)
              ========================================== -->
         <a-assets timeout="10000">
-            <!-- Modelo 3D (Forma) -->
-            <a-asset-item id="modelo-obj" src="untitled.obj"></a-asset-item>
-            
-            <!-- Materiales (Colores) -->
-            <a-asset-item id="modelo-mtl" src="untitled.mtl"></a-asset-item>
+            <!-- Archivo GLB que contiene geometría, colores y texturas -->
+            <a-asset-item id="modelo-glb" src="untitled.glb"></a-asset-item>
         </a-assets>
 
         <!-- ==========================================
              ILUMINACIÓN DEL ESPACIO
              ========================================== -->
-        <a-light type="ambient" color="#ffffff" intensity="0.6"></a-light>
-        <a-light type="directional" position="2 4 3" color="#ffffff" intensity="0.8"></a-light>
-        <a-light type="directional" position="-2 3 -3" color="#ffffff" intensity="0.4"></a-light>
+        <!-- Las luces son esenciales para que los materiales GLB se vean bien -->
+        <a-light type="ambient" color="#ffffff" intensity="0.7"></a-light>
+        <a-light type="directional" position="2 4 3" color="#ffffff" intensity="0.6"></a-light>
+        <a-light type="directional" position="-2 3 -3" color="#ffffff" intensity="0.3"></a-light>
 
         <!-- ==========================================
              TU AMBIENTE 3D RENDERIZADO
              ========================================== -->
-        <!-- Aquí le indicamos a la entidad que use AMBOS archivos -->
-        <a-entity obj-model="obj: #modelo-obj; mtl: #modelo-mtl" position="0 0 0" scale="1 1 1"></a-entity>
+        <!-- Usamos gltf-model en lugar de obj-model -->
+        <a-entity gltf-model="#modelo-glb" position="0 0 0" scale="1 1 1"></a-entity>
 
         <!-- ==========================================
              CÁMARA DE JUGADOR (PARA MOVERSE)
              ========================================== -->
+        <!-- wasd-controls para caminar y look-controls para mirar -->
         <a-camera position="0 1.6 0" wasd-controls="acceleration: 20" look-controls>
             <a-cursor color="#d4af37"></a-cursor>
         </a-camera>
